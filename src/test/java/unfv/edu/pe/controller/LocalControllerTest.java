@@ -1,5 +1,6 @@
 package unfv.edu.pe.controller;
 
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -19,6 +20,13 @@ public class LocalControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;
+	
+	@Test
+	void findAllLocal() throws Exception {
+		mockMvc.perform(MockMvcRequestBuilders.get("/api/recurso"))
+			.andExpect(MockMvcResultMatchers.status().isOk())
+			.andExpect(MockMvcResultMatchers.jsonPath("$", Matchers.hasSize(5)));
+	}	
 	
 	@Test
 	void registrarLocal() throws Exception {
